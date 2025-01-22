@@ -51,7 +51,8 @@ const SESSION_OPTIONS = {
     rtcOfferConstraints: {
         offerToReceiveAudio: true,
         offerToReceiveVideo: false
-    }
+    },
+    encodingsPriority: 'high',
 };
 
 const App = () => {
