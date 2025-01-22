@@ -6,16 +6,16 @@ const ICE_SERVERS = [
     {
         urls: ['stun:stun.l.google.com:19302']
     },
-    {
-        urls: [process.env.REACT_APP_STUN_SERVER],
-        username: process.env.REACT_APP_STUN_USERNAME,
-        credential: process.env.REACT_APP_STUN_PASSWORD
-    },
-    {
-        urls: [process.env.REACT_APP_TURN_SERVER],
-        username: process.env.REACT_APP_TURN_USERNAME,
-        credential: process.env.REACT_APP_TURN_PASSWORD
-    }
+    // {
+    //     urls: [process.env.REACT_APP_STUN_SERVER],
+    //     username: process.env.REACT_APP_STUN_USERNAME,
+    //     credential: process.env.REACT_APP_STUN_PASSWORD
+    // },
+    // {
+    //     urls: [process.env.REACT_APP_TURN_SERVER],
+    //     username: process.env.REACT_APP_TURN_USERNAME,
+    //     credential: process.env.REACT_APP_TURN_PASSWORD
+    // }
 ];
 
 // SIP Configuration
@@ -63,6 +63,11 @@ const App = () => {
 
     // Handle WebRTC track event
     const handleTrackEvent = useCallback((event) => {
+        // console.log('Track event:', event);
+        const pc = event.currentTarget;
+        const senders = pc.getSenders();
+        const param = senders[0].getParameters();
+        console.log('peer conn params', param)
         if (audioRef.current) {
             audioRef.current.srcObject = event.streams[0];
             audioRef.current.play().catch(console.error);
